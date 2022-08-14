@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>children 에 대해서 알아봅니다.</title>
+
+<style type="text/css">
+
+	table, th, td {border: solid 1px gray;}
+	table {border-collapse: collapse; 
+	       width: 150px;} 
+	td {text-align: center;}            
+
+</style>
+
+</head>
+<body>
+
+<div>
+	<table id="tbl">
+		<thead>
+			<tr>
+				<th>성명</th>
+				<th>점수</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>홍길동</td>
+				<td>90</td>
+			</tr>
+			<tr>
+				<td>엄정화</td>
+				<td>100</td>
+			</tr>
+			<tr>
+				<td>이순신</td>
+				<td>50</td>
+			</tr>
+			<tr>
+				<td>유관순</td>
+				<td>70</td>
+			</tr>
+			<tr>
+				<td>김유신</td>
+				<td>80</td>
+			</tr>
+		</tbody>
+	</table>
+</div> 
+<br/>
+
+<button type="button" id="btnPass">합격자명단</button>
+<div id="pass"></div>
+
+<script type="text/javascript">
+	document.getElementById("btnPass").addEventListener('click', ()=>{
+		
+		const tr_arr = document.querySelectorAll("table#tbl > tbody > tr");
+		
+		let output_html = "";
+		
+		tr_arr.forEach(function(item, index, array){
+			output_html += "<tr>";
+			
+			if(item.children[1].innerText >= 80) {
+				output_html += "<td>"+item.children[0].innerText+"</td>";
+				output_html += "<td>"+item.children[1].innerText+"</td>";
+			}
+			
+			output_html += "</tr>";
+		});
+		
+		document.getElementById("pass").innerHTML = `<table>${output_html}</table>`; 
+	}); 
+
+</script>
+
+</body>
+</html>

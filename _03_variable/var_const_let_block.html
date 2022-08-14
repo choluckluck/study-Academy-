@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javaScript 에서 변수 선언시 사용되는 var, const, let 에 대해서 알아보기</title>
+</head>
+<body>
+
+<h1> block 영역내에서 var, const, let 사용하기 </h1>
+
+<div style="display: flex;">
+	<div style= "margin: 0 20px;">
+		<span id="sum1"> </span>
+		<br/><br/>
+		<button type = "button" onclick="myFunction_1()"> 결과보기1</button>
+	</div>
+</div>
+
+	<div style= "margin: 0 20px;">
+		<span id="sum2-1"> </span> &nbsp; <span id="sum2-2"></span>
+		<br/><br/>
+		<button type = "button" onclick="myFunction_2()"> 결과보기2</button>
+</div>
+
+<script type="text/javascript">
+	function myFunction_1() {
+		var num1 = 10;
+		var num2 = 20;
+		
+		{
+			var num1 = 30;
+		}
+		var sum = num1 + num2;	
+		
+		document.getElementById("sum1").innerHTML = sum;
+	}
+	
+	function myFunction_2() {
+		const num1 = 10;
+		const num2 = 20;
+		
+		{
+			const num1 = 40;
+			// {} block 속에 선언된 const num1 은 {} 내에서만 사용가능한 것이며, {} 을 벗어나는 순간 자동적으로 소멸된다.
+			// 그러므로 {} 내에서 새로 선언이 가능하다.
+		}
+		const sum = num1 + num2;	
+		
+		document.getElementById("sum2-1").innerHTML = sum;
+	}
+	
+	
+</script>
+</body>
+</html>

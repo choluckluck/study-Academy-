@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>자바스크립트에서 엘리먼트(태그, 요소)를 잡는 6가지 방법</title>
+
+<style type="text/css">
+	
+</style>
+
+<script type="text/javascript">
+
+	window.onload = function() {
+		
+		// === 1. 자바스크립트에서 태그를 가지고 선택자를 잡는 방법 === 
+		/*
+		    document.getElementsByTagName("태그명"); 이다. 
+		
+		    document.getElementsByTagName("태그명"); 을 실행하면 리턴타입은 객체(object)배열 타입이다.          
+		*/
+		const arrDiv = document.getElementsByTagName("div");
+	//	alert("배열 arrDiv 의 길이 => " + arrDiv.length);    
+		// 배열 arrDiv 의 길이 => 3 
+		
+		for(var i=0; i<arrDiv.length; i++) {
+		//	alert(arrDiv[i].innerText); // red  green  blue
+			
+			arrDiv[i].style.display = "inline-block";
+			arrDiv[i].style.border = "solid 1px gray";
+			arrDiv[i].style.width = "200px";
+			arrDiv[i].style.height = "150px";
+			arrDiv[i].style.margin = "20px";
+			arrDiv[i].style.backgroundColor = arrDiv[i].innerText;
+			// CSS에서 background-color 와 같이 스네이크기법으로 했던것은 자바스크립트에서는 backgroundColor 와 같이 카멜기법으로 바꾸어야만 한다.   
+			arrDiv[i].style.color = "white";
+			
+		}// end of for-----------------
+			
+		
+		// === 2. 자바스크립트에서 클래스명을 가지고 선택자를 잡는 방법 === 
+		/*
+		    document.getElementsByClassName("클래스명"); 이다. 
+		
+		    document.getElementsByClassName("클래스명"); 을 실행하면 리턴타입은 객체(object)배열 타입이다.          
+		*/
+		const arrBtn = document.getElementsByClassName("btn");
+		for(var i=0; i<arrBtn.length; i++) {
+			arrBtn[i].style.backgroundColor = "navy";
+			arrBtn[i].style.color = "white";
+		}// end of for----------------------------    
+		
+		
+		// === 3. 자바스크립트에서 name 속성을 가지고 선택자를 잡는 방법 === 
+		/*
+		    document.getElementsByName("name값"); 이다. 
+		
+		    document.getElementsByName("name값"); 을 실행하면 리턴타입은 객체(object)배열 타입이다.          
+		*/
+		const arrHobby = document.getElementsByName("hobby");
+		
+		for(var i=0; i<arrHobby.length; i++) {
+			console.log(arrHobby[i].value);
+			/*
+			   game
+			   movie
+			   writing
+			   music
+			*/
+		}// end of for------------------------
+		
+		
+		const arrSpan = document.getElementsByClassName("hobby_val");
+		for(var i=0; i<arrSpan.length; i++) {
+			arrSpan[i].innerHTML = arrHobby[i].value;
+		}// end of for-----------------------
+		
+		
+		const arrLabel = document.getElementsByTagName("label");
+		for(var i=0; i<arrLabel.length; i++) {
+			arrLabel[i].style.color = "red";
+		}// end of for----------------------- 
+		
+		
+		// === 4. 자바스크립트에서 id 값을 가지고 선택자를 잡는 방법 === 
+		/*
+		    document.getElementById("id값"); 이다. 
+		
+		    document.getElementById("id값"); 을 실행하면 리턴타입은 객체(object) 타입이다.          
+		*/
+		const btnOK = document.getElementById("btnOK"); 
+		
+		// --- btnOK(확인버튼)을 클릭하면 alert("확인버튼을 클릭하셨군요"); 를 띄우고자 한다. 
+		// === 엘리먼트(객체)를 클릭하면 발생하는 이벤트 핸들러 생성하기 === 
+	/*	
+		btnOK.onclick = function() {
+			// btnOK 를 이벤트소스 라고 부른다.
+			// onclick 을 이벤트 라고 부른다. 지금은 클릭이벤트 이다.
+			// function() { } 부분을 핸들러(처리)라고 부른다.
+			
+		//	window.alert("확인버튼을 클릭하셨군요 -1"); // window 는 생략가능하다.
+			alert("확인버튼을 클릭하셨군요 -1");
+		};	
+	*/	
+	
+	// --- 또는 ---
+	/*
+	    btnOK.addEventListener("click", function(){
+			alert("확인버튼을 클릭하셨군요 -2");
+		}); 
+	*/
+	
+	// --- 또는 ---
+		btnOK.addEventListener("click", ()=>{
+			alert("확인버튼을 클릭하셨군요 -3");
+		});    
+		
+	// --- btnChkbox(체크박스에 체크된것 알아오기)을 클릭하면 체크박스에 체크된것만의 value값 알아오기 ---- // 
+	    const btnChkbox = document.getElementById("btnChkbox");
+	
+	    // === 엘리먼트(객체)를 클릭하면 발생하는 이벤트 핸들러 생성하기 === //
+	    btnChkbox.onclick = function(){
+	    	
+	    	const arrHobby = document.getElementsByName("hobby");
+	    	let result = "";
+	    	let cnt = 0;
+	    	
+	    	console.log("\n~~~~~~~~~~~~~~~~~~~~~~\n");
+	    	
+	    	for(var i=0; i<arrHobby.length; i++) {
+	    		// console.log(arrHobby[i].value + "=> " + arrHobby[i].checked);
+	    		// 체크박스의엘리먼트.checked ==> 체크가 되어져 있으면 true, 체크가 안되어져 있으면 false
+	    		
+	    		if(arrHobby[i].checked) { // 체크박스에 체크가 되었더라면 
+	    			cnt++;
+	    		    let s_comma = (cnt==1)?"":",";
+	    			result += s_comma + arrHobby[i].value;	
+	    		}
+	    		
+	    	}// end of for-------------------------
+	    	
+	    	// 게임과 글쓰기와 음악감상을 체크를 했다라면 결과물은 콘솔창에
+	    	// game,writing,music 와 같이 출력되어야 한다.
+	    	// console.log(result);
+	    	
+	    	document.getElementById("result").innerHTML = result;
+	    };
+	
+	    ///////////////////////////////////////////////////////////
+	    const btnEraser = document.getElementById("btnEraser");
+	    
+	    btnEraser.addEventListener("click", function() {
+	    	document.getElementById("result").innerHTML = "";
+	    });
+	    ///////////////////////////////////////////////////////////
+	    
+	    
+	    const btnChkboxClear = document.getElementById("btnChkboxClear");
+	    
+	    btnChkboxClear.onclick = ()=>{
+	    	const arrHobby = document.getElementsByName("hobby");
+	    	
+	    	for(var i=0; i<arrHobby.length; i++) {
+	    		arrHobby[i].checked = false;
+	    	}// end of for------------------------
+	    	
+	    };
+
+	    /////////////////////////////////////////////////////////////
+	    
+	    
+	    // === 5. 자바스크립트에서 css 선택자를 가지고 잡는 방법 === //
+	    //     document.querySelectorAll(css선택자) 이다.
+	    const arr_li = document.querySelectorAll("body > section:last-child > ol > li:nth-child(3)"); 
+	    
+	    for(var i=0; i<arr_li.length; i++) {
+	    	arr_li[i].style.color = "#ff6666";
+	    	arr_li[i].style.fontStyle = "italic";
+	    	arr_li[i].style.fontWeight = "bold";
+	    }// end of for------------------ 
+	    
+	    
+	    // === 6. 자바스크립트에서 css 선택자를 가지고 잡는 방법 === //
+	    //     document.querySelector(css선택자) 이다.
+	  /*  
+	    const arr2_li = document.querySelectorAll("body > section:last-child > ol > li:first-child"); 
+	    
+	    for(var i=0; i<arr2_li.length; i++) {
+	    	arr2_li[i].style.color = "#40ff00";
+	      	arr2_li[i].style.fontWeight = "bold";
+	    }// end of for------------------ 
+	  */
+	  
+	    const apple = document.querySelectorAll("body > section:last-child > ol > li:first-child")[0];
+	    apple.style.color = "#40ff00";
+	    apple.style.fontWeight = "bold";
+		
+	}// end of window.onload = function() {}----------------------
+
+</script>
+
+</head>
+<body>
+
+	<div>red</div>
+	<div>green</div>
+	<div>blue</div>
+	
+	<br/>
+	
+	<section>
+		<button type="button" class="btn">버튼1</button>
+		<button type="button">버튼2</button>
+		<button type="button" class="btn">버튼3</button>
+		<button type="button">버튼4</button>
+		<button type="button" class="btn">버튼5</button>
+		<button type="button">버튼6</button>
+	</section>
+	
+	<br/>
+	
+	<section>
+		<ul style="list-style-type: none;">
+			<li>
+				<label for="hobby1">게임</label>
+				<input id="hobby1" type="checkbox" value="game" name="hobby" />
+				<span class="hobby_val"></span> 
+			</li>
+			
+			<li>	
+				<label for="hobby2">영화감상</label>
+				<input id="hobby2" type="checkbox" value="movie" name="hobby" />
+			    <span class="hobby_val"></span>
+			</li>
+			
+			<li>	
+				<label for="hobby3">글쓰기</label>
+				<input id="hobby3" type="checkbox" value="writing" name="hobby" />
+			    <span class="hobby_val"></span>
+			</li>
+			
+			<li>	
+				<label for="hobby4">음악감상</label>
+				<input id="hobby4" type="checkbox" value="music" name="hobby" />
+			    <span class="hobby_val"></span>
+			</li>
+		</ul>
+		
+		<button type="button" id="btnOK">확인</button>
+		<button type="button" id="btnChkbox">체크박스에 체크된것 알아오기</button>
+		<button type="button" id="btnEraser">지우기</button>
+		<button type="button" id="btnChkboxClear">체크박스 모두 해제하기</button>
+	    <br/>
+	    체크박스에 체크가 되어진 값 : <span id="result"></span>
+	</section>
+	
+	<br/>
+	
+	<section>
+		<ol>
+			<li>사과</li>
+			<li>딸기</li>
+			<li>포도</li>
+			<li>수박</li>
+		</ol>
+		<ol>
+			<li>파스타</li>
+			<li>모밀</li>
+			<li>칼국수</li>
+			<li>비빔냉면</li>
+		</ol>
+		<ol>
+			<li>국어</li>
+			<li>영어</li>
+			<li>수학</li>
+			<li>체육</li>
+		</ol>
+	</section>
+	
+</body>
+</html>

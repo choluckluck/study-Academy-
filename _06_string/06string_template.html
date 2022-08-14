@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문자열 틀을 나타낼 대는 ""(쌍따옴표) 보다는 ``(백틱)을 사용하도록 하자.)</title>
+</head>
+<body>
+<h1>문자열 틀을 나타낼 때는 ""(쌍따옴표) 보다는 ``(백틱)을 사용하도록 하자</h1>
+   <h2>단, Internet Explore 에서는 ``(백틱)을 지원하지 않는다.</h2>
+   <p id="p_1"></p>
+   <p id="p_2"></p>
+   <p id="p_3"></p>
+   <p id="p_4"></p>
+   <p id="p_5"></p>
+   <p id="p_6"></p>
+   <p id="p_7"></p>
+   <p id="p_8"></p>
+   
+   
+   <script type="text/javascript">
+   
+   	// let text ="안녕하세요? \"이순신\"과 '엄정화'를 소개합니다.";
+   	let text = `안녕하세요? "이순신"과 "엄정화"를 소개합니다.`;
+   	document.getElementById("p_1").innerHTML = text;
+   	
+   	const man = "이순신";
+   	const woman  = '엄정화';
+   	// document.getElementById("p_2").innerHTML = `안녕하세요? ${man}과 ${woman} 를 소개합니다.`;
+   	// 백틱을 사용할 때는 꼭 ${} 을 사용한다.
+   	// document.getElementById("p_2").innerHTML = "안녕하세요? "+man+"과 "+woman+" 를 소개합니다.";
+   	
+   	// document.getElementById("p_2").innerHTML = "안녕하세요? \""+man+"\"과 '"+woman+"' 를 소개합니다.";
+   	document.getElementById("p_2").innerHTML = `안녕하세요? "${man}" 과 '${woman}' 를 소개합니다.`;
+   	
+	document.getElementById("p_3").innerHTML = `안녕하세요? "${man}" 과 '${woman}' ${''/*이것은 주석문*/} 소개합니다.`;
+	//${''} 이거 없이 쓰면 주석문 부분 글 출력됨.
+	
+	
+    const price = 100;
+    const vat = 0.1;
+ // const total = "총액 : " + (price + price*vat); // 총액 : 110
+    const total = `총액 : ${price + price*vat}`;      // 총액 : 110
+    document.getElementById("p_4").innerHTML = total;
+        
+    
+    //////////////////////////////////////////////////////////////////    
+	const title_1 = "분식 메뉴1";
+	
+	let html_1="<h2>"+title_1+"</h2>";
+		  html_1+= "<ul>";
+		  html_1+= "<li>라면</li>"+
+		  		   "<li>떡볶이</li>"+
+		  		   "<li>순대</li>"+
+		  		   "<li>튀김</li>"+
+		  		   "<li>김밥</li>";
+		  html_1 +="</ul>";
+		  
+	document.getElementById("p_5").innerHTML = html_1;
+	
+	/////////////////////////////////////////////////////////////////
+	const title_2 = "분식 메뉴2";
+	
+	let html_2 = `<h2>${title_2}</h2>`;
+		html_2 += `<ul>
+					  <li>라면</li>
+		  		      <li>떡볶이</li>
+		  		      <li>순대</li>
+		  		      <li>튀김</li>
+		  		      <li>김밥</li>
+				   </ul>`
+				;
+		  
+	document.getElementById("p_6").innerHTML = html_2;
+	
+	///////////////////////////////////////////////////////////////// 옛날버전
+    const title_3 = "분식 메뉴3";
+    // 자바스크립트에서 리스트(배열)은 [] 이다.({} 는 객체임) 또한 자바와 달리 객체의 타입에 영향을 받지 않는다.
+    // const foodArr = new Array(); 또는
+    const foodArr = ["라면","떡볶이","튀김","김밥","어묵",50,true,{}]; 
+    
+    let html_3 = "<h2>" + title_3 + "</h2><ul>";
+    for(var i=0; i<foodArr.length; i++){
+        html_3 += "<li>"+ foodArr[i] +"</li>";
+    }//end of for
+    html_3 += "</ul>";
+    document.getElementById("p_7").innerHTML = html_3;
+    
+	
+	///////////////////////////////////////////////////////////////// 백틱버전
+	const title_4 ="분식 메뉴4";
+
+	html_3 = `<h2>${title_4}</h2>`;
+	for(var i=0; i<foodArr.length; i++) {
+		html_3 += `<li>${foodArr[i]}</li>`;
+	} // end of for -------------------
+	
+	html_3 += `</ul>`;
+	document.getElementById("p_8").innerHTML = html_3;
+	
+   	</script>
+</body>
+</html>
